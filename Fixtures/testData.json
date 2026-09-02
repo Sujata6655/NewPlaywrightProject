@@ -1,0 +1,34 @@
+{
+    
+"Url": "https://account.deere.com/actmgmt/profile?TARGET=https://map.deere.com/",
+"operationsCenterUrl": "https://operationscenter.deere.com/",
+
+
+"email": "sunil.yadav@yopmail.com",
+
+"currentPassword": "Testingqaengineer12110@",
+
+"newPassword": "Testingqaengineer12111@",
+
+"confirmPassword": "Testingqaengineer12111@",
+
+"firstName": "Elena",
+"lastName": "Smith",
+"country": "United States",
+"state": "New York",
+"city": "New York",
+"zipCode": "10118",
+"address": "350 5TH AVE # 10118 NEW YORK NY",
+
+"firstName1": "Sunil",
+"lastName1": "Yadav",
+"country1": "India",
+"state1": "Maharashtra",
+"city1": "Magarpatta",
+"zipCode1": "411028",
+"address1": "Magarpatta City, Hadapsar, Pune, Maharashtra 411028",
+"mobileNumber": "+919876543229"
+
+
+}
+

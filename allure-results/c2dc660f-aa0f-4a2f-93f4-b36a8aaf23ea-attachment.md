@@ -1,0 +1,531 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Address.spec.ts >> Update address details twice and logout
+- Location: tests\Address.spec.ts:6:5
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: locator.waitFor: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('xpath=/html/body/div[2]/div[3]/div/div/div[2]/div[2]/button') to be visible
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f4e6]:
+  - progressbar [ref=f4e8]
+  - banner [ref=f4e11]:
+    - generic [ref=f4e12]:
+      - link "Go to home" [ref=f4e13] [cursor=pointer]:
+        - /url: /
+        - img "John Deere Logo" [ref=f4e14]
+      - button [ref=f4e17] [cursor=pointer]
+  - generic [ref=f4e22]:
+    - status [ref=f4e23]:
+      - img "Success:" [ref=f4e25]
+      - generic [ref=f4e27]:
+        - paragraph [ref=f4e28]: Success
+        - paragraph [ref=f4e29]: Your personal information is saved.
+      - button "Close" [ref=f4e32] [cursor=pointer]
+    - progressbar [ref=f4e36]
+    - generic [ref=f4e40]:
+      - heading "Manage Account" [level=3] [ref=f4e41]
+      - separator [ref=f4e42]
+      - generic [ref=f4e43]:
+        - generic [ref=f4e44]:
+          - paragraph [ref=f4e45]: sign-in information
+          - paragraph [ref=f4e46]: Username
+          - paragraph [ref=f4e47]: sunil.yadav@yopmail.com
+          - paragraph [ref=f4e48]: Want to change your password?
+          - button "Change Password" [ref=f4e49] [cursor=pointer]
+        - separator [ref=f4e50]
+      - generic [ref=f4e51]:
+        - paragraph [ref=f4e53]: Personal Information
+        - generic [ref=f4e56]:
+          - generic [ref=f4e57]:
+            - generic [ref=f4e58]:
+              - paragraph [ref=f4e59]: First Name *
+              - textbox [ref=f4e62]: Elena
+            - generic [ref=f4e63]:
+              - paragraph [ref=f4e64]: Last Name *
+              - textbox [ref=f4e67]: Smith
+          - generic [ref=f4e68]:
+            - generic [ref=f4e70]:
+              - paragraph [ref=f4e71]: Country *
+              - combobox [ref=f4e72]:
+                - option "Afghanistan"
+                - option "Albania"
+                - option "Algeria"
+                - option "American Samoa"
+                - option "Andorra"
+                - option "Angola"
+                - option "Anguilla"
+                - option "Antigua and Barbuda"
+                - option "Argentina"
+                - option "Armenia"
+                - option "Australia"
+                - option "Austria"
+                - option "Azerbaijan"
+                - option "Bahamas"
+                - option "Bahrain"
+                - option "Bailiwick of Jersey"
+                - option "Bangladesh"
+                - option "Barbados"
+                - option "Belgium"
+                - option "Belize"
+                - option "Benin"
+                - option "Bermuda"
+                - option "Bhutan"
+                - option "Bolivia"
+                - option "Bosnia and Herzegovina"
+                - option "Botswana"
+                - option "Brazil"
+                - option "Brunei Darussalam"
+                - option "Bulgaria"
+                - option "Burkina Faso"
+                - option "Burundi"
+                - option "Cabo Verde"
+                - option "Cambodia"
+                - option "Cameroon"
+                - option "Canada"
+                - option "Cayman Islands"
+                - option "Central African Republic"
+                - option "Chad"
+                - option "Chile"
+                - option "China"
+                - option "Christmas Island"
+                - option "Cocos (Keeling) Islands"
+                - option "Colombia"
+                - option "Comoros"
+                - option "Congo"
+                - option "Congo, The Democratic republic of the Congo"
+                - option "Cook Islands"
+                - option "Costa Rica"
+                - option "Cote D'Ivoire"
+                - option "Croatia"
+                - option "Curacao"
+                - option "Cyprus"
+                - option "Czechia"
+                - option "Denmark"
+                - option "Djibouti"
+                - option "Dominica"
+                - option "Dominican Republic"
+                - option "Ecuador"
+                - option "Egypt"
+                - option "El Salvador"
+                - option "Equatorial Guinea"
+                - option "Eritrea"
+                - option "Estonia"
+                - option "Eswatini"
+                - option "Ethiopia"
+                - option "Falkland Islands (Malvinas)"
+                - option "Faroe Islands"
+                - option "Fiji"
+                - option "Finland"
+                - option "France"
+                - option "French Guiana"
+                - option "French Polynesia"
+                - option "Gabon"
+                - option "Gambia"
+                - option "Georgia"
+                - option "Germany"
+                - option "Ghana"
+                - option "Gibraltar"
+                - option "Greece"
+                - option "Greenland"
+                - option "Grenada"
+                - option "Guadeloupe"
+                - option "Guam"
+                - option "Guatemala"
+                - option "Guernsey"
+                - option "Guinea"
+                - option "Guinea-Bissau"
+                - option "Guyana"
+                - option "Haiti"
+                - option "Holy See"
+                - option "Honduras"
+                - option "Hong Kong"
+                - option "Hungary"
+                - option "Iceland"
+                - option "India"
+                - option "Indonesia"
+                - option "Iraq"
+                - option "Ireland"
+                - option "Isle of Man"
+                - option "Israel"
+                - option "Italy"
+                - option "Jamaica"
+                - option "Japan"
+                - option "Jordan"
+                - option "Kazakhstan"
+                - option "Kenya"
+                - option "Kiribati"
+                - option "Korea, Republic of"
+                - option "Kuwait"
+                - option "Kyrgyzstan"
+                - option "Lao People's Democratic Republic"
+                - option "Latvia"
+                - option "Lebanon"
+                - option "Lesotho"
+                - option "Liberia"
+                - option "Libyan Arab Jamahiriya"
+                - option "Liechtenstein"
+                - option "Lithuania"
+                - option "Luxembourg"
+                - option "Madagascar"
+                - option "Malawi"
+                - option "Malaysia"
+                - option "Maldives"
+                - option "Mali"
+                - option "Malta"
+                - option "Marshall Islands"
+                - option "Martinique"
+                - option "Mauritania"
+                - option "Mauritius"
+                - option "Mayotte"
+                - option "Mexico"
+                - option "Micronesia"
+                - option "Moldova"
+                - option "Monaco"
+                - option "Mongolia"
+                - option "Montenegro"
+                - option "Montserrat"
+                - option "Morocco"
+                - option "Mozambique"
+                - option "Myanmar"
+                - option "Namibia"
+                - option "Nauru"
+                - option "Nepal"
+                - option "Netherlands"
+                - option "New Caledonia"
+                - option "New Zealand"
+                - option "Nicaragua"
+                - option "Niger"
+                - option "Nigeria"
+                - option "Niue"
+                - option "Norfolk Island"
+                - option "North Macedonia"
+                - option "Northern Mariana Islands"
+                - option "Norway"
+                - option "Oman"
+                - option "Pakistan"
+                - option "Palau"
+                - option "Palestinian"
+                - option "Panama"
+                - option "Papua New Guinea"
+                - option "Paraguay"
+                - option "Peru"
+                - option "Philippines"
+                - option "Poland"
+                - option "Portugal"
+                - option "Puerto Rico"
+                - option "Qatar"
+                - option "Reunion"
+                - option "Romania"
+                - option "Rwanda"
+                - option "Saint Barthelemy"
+                - option "Saint Helena"
+                - option "Saint Kitts and Nevis"
+                - option "Saint Lucia"
+                - option "Saint Martin"
+                - option "Saint Pierre and Miquelon"
+                - option "Saint Vincent and the Grenadines"
+                - option "Samoa"
+                - option "San Marino"
+                - option "Sao Tome and Principe"
+                - option "Saudi Arabia"
+                - option "Senegal"
+                - option "Serbia"
+                - option "Seychelles"
+                - option "Sierra Leone"
+                - option "Singapore"
+                - option "Slovakia"
+                - option "Slovenia"
+                - option "Solomon Islands"
+                - option "Somalia"
+                - option "South Africa"
+                - option "South Sudan"
+                - option "Spain"
+                - option "Sri Lanka"
+                - option "Sudan"
+                - option "Suriname"
+                - option "Sweden"
+                - option "Switzerland"
+                - option "Taiwan, Province of China"
+                - option "Tajikistan"
+                - option "Tanzania"
+                - option "Thailand"
+                - option "Togo"
+                - option "Tokelau"
+                - option "Tonga"
+                - option "Trinidad and Tobago"
+                - option "Tunisia"
+                - option "Turkey"
+                - option "Turkmenistan"
+                - option "Turks and Caicos Islands"
+                - option "Tuvalu"
+                - option "Uganda"
+                - option "Ukraine"
+                - option "United Arab Emirates"
+                - option "United Kingdom"
+                - option "United States" [selected]
+                - option "United States Minor Outlying Islands"
+                - option "Uruguay"
+                - option "Uzbekistan"
+                - option "Vanuatu"
+                - option "Venezuela"
+                - option "Vietnam"
+                - option "Virgin Islands, British"
+                - option "Virgin Islands, U.S."
+                - option "Wallis and Futuna"
+                - option "Western Sahara"
+                - option "Yemen"
+                - option "Zambia"
+                - option "Zimbabwe"
+            - generic [ref=f4e74]:
+              - paragraph [ref=f4e75]: Address Line 1 *
+              - textbox [ref=f4e78]: Magarpatta City, Hadapsar, Pune, Maharashtra 411028
+            - generic [ref=f4e80]:
+              - paragraph [ref=f4e81]: City *
+              - textbox [ref=f4e84]: Magarpatta
+            - generic [ref=f4e86]:
+              - paragraph [ref=f4e87]: State *
+              - combobox [ref=f4e88]:
+                - option "Please select"
+                - option "Alabama"
+                - option "Alaska"
+                - option "American Samoa"
+                - option "Arizona"
+                - option "Arkansas"
+                - option "Armed Forces Africa"
+                - option "Armed Forces Americas (not Canada)"
+                - option "Armed Forces Canada"
+                - option "Armed Forces Europe"
+                - option "Armed Forces Middle East"
+                - option "Armed Forces Pacific"
+                - option "California"
+                - option "Colorado"
+                - option "Connecticut"
+                - option "Delaware"
+                - option "District of Columbia"
+                - option "Florida"
+                - option "Georgia"
+                - option "Guam"
+                - option "Hawaii"
+                - option "Idaho"
+                - option "Illinois"
+                - option "Indiana"
+                - option "Iowa"
+                - option "Kansas"
+                - option "Kentucky"
+                - option "Louisiana"
+                - option "Maine"
+                - option "Maryland"
+                - option "Massachusetts"
+                - option "Michigan"
+                - option "Minnesota"
+                - option "Mississippi"
+                - option "Missouri"
+                - option "Montana"
+                - option "Nebraska"
+                - option "Nevada"
+                - option "New Hampshire"
+                - option "New Jersey"
+                - option "New Mexico"
+                - option "New York" [selected]
+                - option "North Carolina"
+                - option "North Dakota"
+                - option "Northern Mariana Islands"
+                - option "Ohio"
+                - option "Oklahoma"
+                - option "Oregon"
+                - option "Pennsylvania"
+                - option "Puerto Rico"
+                - option "Rhode Island"
+                - option "South Carolina"
+                - option "South Dakota"
+                - option "Tennessee"
+                - option "Texas"
+                - option "Utah"
+                - option "Vermont"
+                - option "Virgin Islands"
+                - option "Virginia"
+                - option "Washington"
+                - option "West Virginia"
+                - option "Wisconsin"
+                - option "Wyoming"
+            - generic [ref=f4e90]:
+              - paragraph [ref=f4e91]: ZIP Code *
+              - textbox [ref=f4e94]: "411028"
+            - generic [ref=f4e95]:
+              - button "Cancel" [ref=f4e96] [cursor=pointer]
+              - button "Save" [active] [ref=f4e97] [cursor=pointer]
+        - separator [ref=f4e98]
+        - alert [ref=f4e99]:
+          - img "Info:" [ref=f4e101]
+          - generic [ref=f4e103]: We highly recommend you verify your phone number. Once verified, you can recover your User Account using SMS text as identity verification. You will also have the added benefit of receiving SMS text communications from John Deere.Verify your phone number.
+        - generic [ref=f4e109]:
+          - generic [ref=f4e110]:
+            - paragraph [ref=f4e111]: Phone Number
+            - img [ref=f4e112] [cursor=pointer]
+          - generic [ref=f4e116]:
+            - textbox "1 (702) 123-4567" [disabled] [ref=f4e117]: "+919876543229"
+            - 'button "India: + 91" [ref=f4e119]'
+        - separator [ref=f4e122]
+      - generic [ref=f4e127]:
+        - paragraph [ref=f4e128]: Email Address *
+        - textbox [disabled] [ref=f4e132]: sunil.yadav@yopmail.com
+        - generic [ref=f4e135]: Edit or change of email address is not allowed if Username is an email address.
+      - separator [ref=f4e136]
+      - button "Back to previous page" [ref=f4e137] [cursor=pointer]
+  - generic [ref=f4e138]:
+    - contentinfo [ref=f4e139]:
+      - navigation "footer navigation" [ref=f4e140]:
+        - list [ref=f4e141]:
+          - listitem [ref=f4e142]:
+            - link "Privacy and Data" [ref=f4e143] [cursor=pointer]:
+              - /url: https://www.deere.com/en/privacy-and-data/
+          - listitem [ref=f4e144]:
+            - link "Terms of Use" [ref=f4e145] [cursor=pointer]:
+              - /url: https://www.deere.com/en/privacy-and-data/myjohndeere/terms/
+          - listitem [ref=f4e146]:
+            - link "Contact Us" [ref=f4e147] [cursor=pointer]:
+              - /url: https://account-helppages.deere.com/contact-us
+      - generic [ref=f4e148]: Copyright © 2026 Deere & Company. All Rights Reserved.
+    - list
+```
+
+# Test source
+
+```ts
+  14  |   readonly savePersonalInfoButton: Locator;
+  15  |   readonly useaddressbutton: Locator;
+  16  |   readonly changePasswordButton: Locator;
+  17  |   readonly profileDropdown: Locator;
+  18  |   readonly logoutButton: Locator;
+  19  | 
+  20  |   constructor(page: Page) {
+  21  |     this.page = page;
+  22  | 
+  23  |     this.firstName = page.locator('input[name="firstName"]');
+  24  |     
+  25  |     this.lastName = page.locator('input[name="lastName"]');
+  26  |   
+  27  | 
+  28  |     this.country = page.locator('//*[@id="addressDetailsId"]/div[1]/div/select');
+  29  |      this.address = page.locator('input[name="1"]');
+  30  |      this.city = page.locator('input[name="3"]');
+  31  |     this.state = page.locator('select[name="4"]')
+  32  |     this.zipCode = page.locator('input[name="5"]');
+  33  |  
+  34  | 
+  35  |     this.savePersonalInfoButton = page.locator(
+  36  |       'xpath=//div[@id="addressDetailsId"]//button[2]'
+  37  |     );
+  38  | 
+  39  |     this.useaddressbutton = page.locator(
+  40  |         'xpath=/html/body/div[2]/div[3]/div/div/div[2]/div[2]/button'
+  41  |     );
+  42  | 
+  43  |     this.changePasswordButton = page.locator(
+  44  |       'xpath=//*[@id="sigInInfoId"]/div/button'
+  45  |     );
+  46  | 
+  47  |     this.profileDropdown = page.locator(
+  48  |       'xpath=//*[@id="root"]/div/div/div/div/header/div/div/div/button'
+  49  |     );
+  50  | 
+  51  |     this.logoutButton = page.locator(
+  52  |       'xpath=/html/body/div[2]/div[3]/ul/li'
+  53  |     );
+  54  |   }
+  55  | 
+  56  |   async verifyProfileLoaded() {
+  57  |     await expect(this.firstName).toBeVisible({
+  58  |       timeout: 60000,
+  59  |     });
+  60  |   }
+  61  | async updatePersonalInfo(
+  62  |   firstName: string,
+  63  |   lastName: string,
+  64  |   country: string,
+  65  |   city: string,
+  66  |   zipCode: string,
+  67  |   address: string,
+  68  |   state: string
+  69  | ) {
+  70  |   await this.firstName.fill(firstName);
+  71  |   await this.lastName.fill(lastName);
+  72  | await this.country.scrollIntoViewIfNeeded();
+  73  | await expect(this.country).toBeVisible();
+  74  | await this.country.selectOption({ label: country });
+  75  | await this.state.scrollIntoViewIfNeeded();
+  76  | await expect(this.state).toBeVisible();
+  77  | 
+  78  | const tagName = await this.state.evaluate(el => el.tagName);
+  79  | console.log('Tag Name:', tagName);
+  80  | 
+  81  | const options = await this.state.locator('option').allTextContents();
+  82  | console.log('Available options:', options);
+  83  | console.log('State value passed:', state);
+  84  | 
+  85  | await this.state.selectOption({ label: state });
+  86  | 
+  87  | // Wait for form refresh/API call after state selection
+  88  | await this.page.waitForLoadState('networkidle');
+  89  | await this.address.click();
+  90  | await this.address.press('Control+A');
+  91  | await this.address.press('Backspace');
+  92  | await this.address.fill(address);
+  93  | 
+  94  | 
+  95  | await this.city.scrollIntoViewIfNeeded();
+  96  | await expect(this.city).toBeVisible();
+  97  | await this.city.fill(city);
+  98  | 
+  99  | await expect(this.city).toHaveValue(city, { timeout: 10000 });
+  100 | 
+  101 | await this.zipCode.scrollIntoViewIfNeeded();
+  102 | await expect(this.zipCode).toBeVisible();
+  103 | await this.zipCode.fill(zipCode);
+  104 | 
+  105 | await expect(this.zipCode).toHaveValue(zipCode, { timeout: 10000 });
+  106 | 
+  107 | console.log('Address:', await this.address.inputValue());
+  108 | console.log('City:', await this.city.inputValue());
+  109 | console.log('Zip:', await this.zipCode.inputValue());
+  110 | 
+  111 | await this.savePersonalInfoButton.click();
+  112 | 
+  113 | 
+> 114 | await this.useaddressbutton.waitFor({ state: 'visible', timeout: 10000 });
+      |                             ^ Error: locator.waitFor: Test timeout of 30000ms exceeded.
+  115 | await this.useaddressbutton.click();
+  116 | 
+  117 | }
+  118 | 
+  119 | 
+  120 |   async logout() {
+  121 |     await expect(this.profileDropdown).toBeVisible();
+  122 | 
+  123 |     await this.profileDropdown.click();
+  124 | 
+  125 |     await expect(this.logoutButton).toBeVisible();
+  126 | 
+  127 |     await this.logoutButton.click();
+  128 |   }
+  129 | }
+```

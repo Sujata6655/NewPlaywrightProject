@@ -1,0 +1,118 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Edit-profile.spec.ts >> Edit Profile
+- Location: tests\Edit-profile.spec.ts:3:5
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: expect(locator).toBeEnabled() failed
+
+Locator:  getByRole('button', { name: /^Save$/ })
+Expected: enabled
+Received: disabled
+
+Call log:
+  - Expect "toBeEnabled" with timeout 5000ms
+  - waiting for getByRole('button', { name: /^Save$/ })
+    5 × locator resolved to <button disabled tabindex="-1" type="submit" class="MuiButtonBase-root MuiButton-root MuiButton-secondary MuiButton-secondaryPrimary MuiButton-sizeSmall MuiButton-secondarySizeSmall MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-secondary MuiButton-secondaryPrimary MuiButton-sizeSmall MuiButton-secondarySizeSmall MuiButton-colorPrimary css-z1moln">Save</button>
+      - unexpected value "disabled"
+  - Test timeout of 30000ms exceeded.
+
+```
+
+```yaml
+- button "Save" [disabled]
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | test('Edit Profile', async ({ page }) => {
+  4  | 
+  5  |   const email = 'sunil.yadav@yopmail.com';
+  6  |   const password = 'Test@111111';
+  7  | 
+  8  |   await page.goto(
+  9  |     'https://account.deere.com/actmgmt/profile?TARGET=https://map.deere.com/'
+  10 |   );
+  11 | 
+  12 |   // Username
+  13 |   await page.locator('#input28').fill(email);
+  14 | 
+  15 |   // Next
+  16 |   await page.locator("//*[@id='form20']/div[2]/input").click();
+  17 | 
+  18 |   // Password
+  19 |   await page.locator('#input54').fill(password);
+  20 | 
+  21 |   // Sign In
+  22 |   await page.locator("#form46 input[type='submit']").click();
+  23 | 
+  24 |   await page.waitForLoadState('networkidle');
+  25 | 
+  26 |   // Verify Personal Information section
+  27 |   await expect(
+  28 |     page.getByText(/Personal Information/i)
+  29 |   ).toBeVisible({ timeout: 60000 });
+  30 | 
+  31 |   // First Name
+  32 |   const nameField = page.locator('//*[@id=":r2:"]');
+  33 | 
+  34 |   await expect(nameField).toBeVisible();
+  35 |   await expect(nameField).toBeEnabled();
+  36 | 
+  37 |   await nameField.clear();
+  38 |   await nameField.fill('Sunil S');
+  39 | 
+  40 |   // Save Personal Information
+  41 |   await page.locator('//*[@id="addressDetailsId"]/div[5]/button[2]').click();
+  42 | 
+  43 |   await expect(
+  44 |     page.getByText(/Your personal information is saved/i)
+  45 |   ).toBeVisible({ timeout: 30000 });
+  46 | 
+  47 |   // Mobile Number
+  48 |  // Mobile Number
+  49 | const mobileField = page.locator("//input[@id='mobile' and @type='tel']");
+  50 | 
+  51 | await mobileField.scrollIntoViewIfNeeded();
+  52 | await expect(mobileField).toBeVisible();
+  53 | await expect(mobileField).toBeEnabled({ timeout: 10000 });
+  54 | 
+  55 | // Update mobile number
+  56 | await mobileField.click();
+  57 | await mobileField.press('Control+A');
+  58 | await mobileField.fill('9876543222');
+  59 | 
+  60 | // Save Phone Details
+  61 | const saveButton = page.getByRole('button', { name: /^Save$/ });
+  62 | 
+  63 | await expect(saveButton).toBeVisible({ timeout: 10000 });
+  64 | 
+> 65 | await expect(saveButton).toBeEnabled();
+     |                          ^ Error: expect(locator).toBeEnabled() failed
+  66 | 
+  67 | await saveButton.click();
+  68 | 
+  69 | // Verify Success Message
+  70 | await expect(
+  71 |   page.getByText(/Updated Successfully/i)
+  72 | ).toBeVisible({ timeout: 30000 });
+  73 | 
+  74 | // Close Popup
+  75 | await page.locator("//*[@id=':ru:']/button").click();
+  76 | });
+```

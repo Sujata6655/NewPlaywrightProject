@@ -1,0 +1,185 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test1.spec.ts >> Edit Profile and Change Password
+- Location: tests\test1.spec.ts:3:5
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('input[name="firstName"]')
+Expected: visible
+Timeout: 60000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 60000ms
+  - waiting for locator('input[name="firstName"]')
+
+```
+
+```yaml
+- main:
+  - heading "John Deere logo logo" [level=1]:
+    - img "John Deere logo logo"
+  - heading "Sign In" [level=2]
+  - text: sunil.yadav@yopmail.com
+  - alert:
+    - alert:
+      - text: 
+      - paragraph: Unable to sign in
+  - text: Password
+  - textbox "Password":
+    - /placeholder: ""
+    - text: 4e5r6t7y$E%R^T&j
+  - text: 
+  - button "Sign In"
+  - link "Forgot Username or Password":
+    - /url: https://account.deere.com/actmgmt/forgotpassword?TARGET=https://account.deere.com
+  - link "Back to sign in":
+    - /url: "#"
+- link "Contact Us":
+  - /url: "https://account-helppages.deere.com/signin-help "
+- text: Copyright © 2026 Deere & Company. All Rights Reserved.
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect } from '@playwright/test';
+  2   | 
+  3   | test('Edit Profile and Change Password', async ({ page }) => {
+  4   |   test.setTimeout(180000);
+  5   | 
+  6   |   const email = 'sunil.yadav@yopmail.com';
+  7   | 
+  8   |   const currentPassword = '4e5r6t7y$E%R^T&j';
+  9   |   const newPassword = '4e5r6t7y$E%R^T&k';
+  10  |    const confirmPassword = '4e5r6t7y$E%R^T&k';
+  11  | 
+  12  | 
+  13  |   // Open URL
+  14  |   await page.goto(
+  15  |     'https://account.deere.com/actmgmt/profile?TARGET=https://map.deere.com/'
+  16  |   );
+  17  | 
+  18  |   // Login
+  19  |   await page.locator('#input28').fill(email);
+  20  |   await page.locator('#form20 input[type="submit"]').click();
+  21  | 
+  22  |   await page.locator('#input54').fill(currentPassword);
+  23  |   await page.locator('#form46 input[type="submit"]').click();
+  24  | 
+  25  |   // Verify Profile Page
+  26  |   const firstName = page.locator('input[name="firstName"]');
+  27  | 
+> 28  |   await expect(firstName).toBeVisible({
+      |                           ^ Error: expect(locator).toBeVisible() failed
+  29  |     timeout: 60000,
+  30  |   });
+  31  | 
+  32  |   // Update First Name
+  33  |   await firstName.clear();
+  34  |   await firstName.fill('Sunil S');
+  35  | 
+  36  |   // Save Personal Information
+  37  |   await page
+  38  |     .locator('xpath=//*[@id="addressDetailsId"]/div[5]/button[2]')
+  39  |     .click();
+  40  | 
+  41  |   await page.waitForTimeout(3000);
+  42  | 
+  43  |   // Click Change Password
+  44  |   const changePasswordButton = page.locator(
+  45  |     'xpath=//*[@id="sigInInfoId"]/div/button'
+  46  |   );
+  47  | 
+  48  |   await expect(changePasswordButton).toBeVisible({
+  49  |     timeout: 30000,
+  50  |   });
+  51  | 
+  52  |   await changePasswordButton.scrollIntoViewIfNeeded();
+  53  |   await changePasswordButton.click();
+  54  | 
+  55  |   // Optional Popup
+  56  |   const okButton = page.locator('//button[contains(.,"ok")]');
+  57  | 
+  58  |   try {
+  59  |     await okButton.waitFor({
+  60  |       state: 'visible',
+  61  |       timeout: 5000,
+  62  |     });
+  63  | 
+  64  |     await okButton.click();
+  65  |     console.log('Popup handled');
+  66  |   } catch {
+  67  |     console.log('Popup not displayed');
+  68  |   }
+  69  | 
+  70  |   // Current Password
+  71  | // Current Password
+  72  | const currentPwd = page.locator(
+  73  |   'xpath=//*[@id="credentialsForm"]/div/div[1]/div[1]/div/div/input'
+  74  | );
+  75  | 
+  76  | await currentPwd.click();
+  77  | await page.keyboard.press('Control+A');
+  78  | await page.keyboard.press('Delete');
+  79  | await page.keyboard.type(currentPassword);
+  80  | 
+  81  | // New Password
+  82  | const newPwd = page.locator(
+  83  |   'xpath=//*[@id="credentialsForm"]/div/div[1]/div[2]/div/div/input'
+  84  | );
+  85  | 
+  86  | await newPwd.click();
+  87  | await page.keyboard.press('Control+A');
+  88  | await page.keyboard.press('Delete');
+  89  | await page.keyboard.type(newPassword);
+  90  | 
+  91  | // Confirm Password
+  92  | const confirmPwd = page.locator(
+  93  |   'xpath=//*[@id="credentialsForm"]/div/div[1]/div[3]/div/div/input'
+  94  | );
+  95  | 
+  96  | await confirmPwd.click();
+  97  | await page.keyboard.press('Control+A');
+  98  | await page.keyboard.press('Delete');
+  99  | await page.keyboard.type(confirmPassword );
+  100 | 
+  101 | // Trigger validation
+  102 | await page.keyboard.press('Tab');
+  103 | await page.mouse.click(1200, 200);
+  104 | 
+  105 | await page.waitForTimeout(3000);
+  106 | 
+  107 | // Check Save button enabled
+  108 | await page.locator('xpath=//*[@id="credentialsForm"]/button[2]').click();
+  109 | 
+  110 | // console.log('Save Enabled:', await saveButton.isEnabled());
+  111 | 
+  112 | // await expect(saveButton).toBeEnabled({
+  113 | //   timeout: 30000,
+  114 | // });
+  115 | 
+  116 | 
+  117 |   
+  118 | 
+  119 |   // Trigger Validation
+  120 | //   await page.locator('text=Password Guidelines').click();
+  121 | 
+  122 | 
+  123 | 
+  124 | 
+  125 | const guidelines = page.getByText('Password Guidelines');
+  126 | 
+  127 | 
+  128 | await expect(guidelines).toBeVisible();
+```
