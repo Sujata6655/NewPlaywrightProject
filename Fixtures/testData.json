@@ -6,11 +6,11 @@
 
 "email": "sunil.yadav@yopmail.com",
 
-"currentPassword": "Testingqaengineer12110@",
+"currentPassword": "Testingqaengineer12121@",
 
-"newPassword": "Testingqaengineer12111@",
+"newPassword": "Testingqaengineer12122@",
 
-"confirmPassword": "Testingqaengineer12111@",
+"confirmPassword": "Testingqaengineer12122@",
 
 "firstName": "Elena",
 "lastName": "Smith",
@@ -27,7 +27,13 @@
 "city1": "Magarpatta",
 "zipCode1": "411028",
 "address1": "Magarpatta City, Hadapsar, Pune, Maharashtra 411028",
-"mobileNumber": "+919876543229"
+"mobileNumber": "+919876543229",
+
+  "Email": "testingprod1001@yopmail.com",
+  "newPassword1": "Testingqait12@#",
+  "confirmPassword1": "Testingqait12@#"
+
+
 
 
 }

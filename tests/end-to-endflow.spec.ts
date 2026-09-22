@@ -5,9 +5,9 @@ test('Edit Profile and Change Password', async ({ page }) => {
 
   const email = 'sunil.yadav@yopmail.com';
 
-  const currentPassword = '4e5r6t$E%R^T1';
-  const newPassword = '4e5r6t$E%R^T2';
-   const confirmPassword = '4e5r6t$E%R^T2';
+  const currentPassword = '';
+  const newPassword = '';
+   const confirmPassword = '';
 
 
   // Open URL

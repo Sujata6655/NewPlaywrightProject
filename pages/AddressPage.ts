@@ -57,8 +57,9 @@ export class AddressPage {
     city: string,
     zipCode: string,
     address: string,
-    state: string
-  ) {
+    state: string,
+    beforeSave?: () => Promise<unknown>
+  ): Promise<unknown> {
     // First Name
     await this.firstName.clear();
     await this.firstName.fill(firstName);
@@ -72,31 +73,74 @@ export class AddressPage {
     await expect(this.country).toBeVisible();
     await this.country.selectOption({ label: country });
 
-    // State (Optional)
-    const stateVisible = await this.state
-      .isVisible()
-      .catch(() => false);
+    // // State (Optional)
+    // const stateVisible = await this.state
+    //   .isVisible()
+    //   .catch(() => false);
 
-    if (stateVisible && state) {
-      const options = await this.state
-        .locator('option')
-        .allTextContents();
+    // if (stateVisible && state) {
+    //   const options = await this.state
+    //     .locator('option')
+    //     .allTextContents();
 
-      console.log('Available State Options:', options);
-      console.log('State Passed:', state);
+    //   console.log('Available State Options:', options);
+    //   console.log('State Passed:', state);
 
-      if (options.includes(state)) {
-        await this.state.selectOption({ label: state });
-      } else {
-        console.log(
-          `State "${state}" not found. Skipping state selection.`
-        );
-      }
-    } else {
-      console.log(
-        `State dropdown not available for country: ${country}`
-      );
-    }
+    //   if (options.includes(state)) {
+    //     await this.state.selectOption({ label: state });
+    //   } else {
+    //     console.log(
+    //       `State "${state}" not found. Skipping state selection.`
+    //     );
+    //   }
+    // } else {
+    //   console.log(
+    //     `State dropdown not available for country: ${country}`
+    //   );
+    // }
+    // Select Country
+
+
+// Wait for State dropdown to load
+await this.state.waitFor({
+  state: 'visible',
+  timeout: 10000
+}).catch(() => {});
+
+// State (Optional)
+const stateVisible = await this.state
+  .isVisible()
+  .catch(() => false);
+
+if (stateVisible && state) {
+
+  const options = await this.state
+    .locator('option')
+    .allTextContents();
+
+  console.log('Available State Options:', options);
+  console.log('State Passed:', state);
+
+  if (
+    options.some(
+      option =>
+        option.trim() === state.trim()
+    )
+  ) {
+    await this.state.selectOption({
+      label: state
+    });
+  } else {
+    console.log(
+      `State "${state}" not found. Available states: ${options.join(', ')}`
+    );
+  }
+} else {
+  console.log(
+    `State dropdown not available for country: ${country}`
+  );
+}
+
 
     // Address
     await this.address.scrollIntoViewIfNeeded();
@@ -130,6 +174,7 @@ export class AddressPage {
     console.log('Zip:', await this.zipCode.inputValue());
 
     // Save
+    const saveResponsePromise = beforeSave?.();
     await this.savePersonalInfoButton.click();
   
     const successMessage = this.page.getByText(/success|updated|saved/i);
@@ -148,22 +193,41 @@ if (await successMessage.isVisible().catch(() => false)) {
 
   console.log('Success message closed');
 }
+try {
+  await this.useaddressbutton.waitFor({
+    state: 'visible',
+    timeout: 10000,
+  });
+
+  await this.useaddressbutton.scrollIntoViewIfNeeded();
+
+  await expect(this.useaddressbutton).toBeEnabled();
+
+  await this.useaddressbutton.click();
+
+  console.log('Address validation popup handled');
+} catch (error) {
+  console.log('No address validation popup displayed');
+}
 
     // Address validation popup
-    const popupVisible = await this.useaddressbutton
-      .isVisible()
-      .catch(() => false);
+  //   const popupVisible = await this.useaddressbutton
+  //     .isVisible()
+  //     .catch(() => false);
 
-    if (popupVisible) {
-      await this.useaddressbutton.click();
-      console.log('Address validation popup handled');
-    } else {
-      console.log('No address validation popup displayed');
-    }
+  //   if (popupVisible) {
+  //     await this.useaddressbutton.click();
+  //     console.log('Address validation popup handled');
+  //   } else {
+  //     console.log('No address validation popup displayed');
+  //   }
+
+    const saveResponse = await saveResponsePromise;
 
     // Wait for save completion
     console.log('Profile saved successfully');
-  }
+    return saveResponse;
+   }
   
    async logout() {
     await expect(this.profileDropdown).toBeVisible();

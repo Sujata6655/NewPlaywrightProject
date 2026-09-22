@@ -11,6 +11,8 @@ export class PasswordChangePage {
   readonly confirmPasswordField: Locator;
   readonly savePasswordButton: Locator;
   readonly changePasswordButton: Locator;
+    readonly profileDropdown: Locator;
+  readonly logoutButton: Locator;
  
 
 
@@ -56,44 +58,110 @@ export class PasswordChangePage {
     this.okButton = page.locator(
       '//button[contains(.,"ok")]'
     );
+    this.profileDropdown = page.locator('//*[@id="root"]/div/div/div/div/header/div/div/div/button');
+    this.logoutButton = page.locator('xpath=/html/body/div[2]/div[3]/ul/li');
 
   }
 
+ 
  
 
   // ==========================================
   // CHANGE PASSWORD
   // ==========================================
 
-  async openChangePassword() {
+  // async openChangePassword() {
    
 
-    await this.changePasswordButton.scrollIntoViewIfNeeded();
+  //   await this.changePasswordButton.scrollIntoViewIfNeeded();
 
-    await expect(
-      this.changePasswordButton
-    ).toBeVisible({
-      timeout: 30000,
-    });
+  //   await expect(
+  //     this.changePasswordButton
+  //   ).toBeVisible({
+  //     timeout: 30000,
+  //   });
 
-    await this.changePasswordButton.click({
-      force: true,
-    });
-  }
+  //   await this.changePasswordButton.click({
+  //     force: true,
+  //   });
+
+    
+
+// await expect(this.currentPasswordField).toBeVisible({
+
+// timeout: 30000,
+
+// });
+//   }
+
+// async openChangePassword() {
+
+//   await this.changePasswordButton.scrollIntoViewIfNeeded();
+
+//   await expect(this.changePasswordButton).toBeVisible({
+//     timeout: 30000,
+//   });
+
+//   await this.changePasswordButton.click({
+//     force: true,
+//   });
+
+//   // 👇 Add here
+//   await this.page.waitForTimeout(5000);
+
+//   console.log(
+//     'Current Password Count:',
+//     await this.currentPasswordField.count()
+//   );
+
+//   await this.page.screenshot({
+//     path: 'change-password.png',
+//     fullPage: true,
+//   });
+
+//   await expect(this.currentPasswordField).toBeVisible({
+//     timeout: 30000,
+//   });
+// }
+
+async openChangePassword() {
+  await expect(this.changePasswordButton).toBeVisible({
+    timeout: 30000,
+  });
+
+  await expect(this.changePasswordButton).toBeEnabled({
+    timeout: 30000,
+  });
+
+  console.log(
+    "Button visible:",
+    await this.changePasswordButton.isVisible()
+  );
+
+  console.log(
+    "Button enabled:",
+    await this.changePasswordButton.isEnabled()
+  );
+
+  await this.changePasswordButton.scrollIntoViewIfNeeded();
+
+  await this.changePasswordButton.click();
+
+  await this.page.waitForTimeout(3000);
+}
 
   async handlePopup() {
     try {
-      await this.okButton.waitFor({
-        state: 'visible',
+      await expect(this.okButton).toBeVisible({
         timeout: 5000,
       });
 
       await this.okButton.click();
-
-      console.log('Popup Handled');
     } catch {
-      console.log('Popup Not Displayed');
+      // The popup is optional and may not be shown for every account.
     }
+
+    
   }
 
   async enterPasswords(
@@ -148,6 +216,16 @@ export class PasswordChangePage {
     console.log(
       'Password Changed Successfully'
     );
+  }
+
+  async logout() {
+    await expect(this.profileDropdown).toBeVisible();
+
+    await this.profileDropdown.click();
+
+    await expect(this.logoutButton).toBeVisible();
+
+    await this.logoutButton.click();
   }
 
 }

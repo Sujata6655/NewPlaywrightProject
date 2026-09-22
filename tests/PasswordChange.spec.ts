@@ -1,17 +1,17 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
-import { ProfilePage } from '../pages/profilePage';
-import { FinalFlowPage } from '../pages/FinalFlowPage';
+import { PasswordChangePage } from '../pages/PasswordChangePage';
+
 import testData from '../Fixtures/testData.json';
 
-test('Edit Profile, Mobile Number and Change Password', async ({
+test(' Change Password', async ({
   page,
 }) => {
   test.setTimeout(180000);
 
   const loginPage = new LoginPage(page);
-  const profilePage = new ProfilePage(page);
-  const passwordChangePage = new FinalFlowPage(page);
+
+  const passwordChangePage = new PasswordChangePage(page);
 
   // Login
   //wait loginPage.navigate();
@@ -26,7 +26,7 @@ test('Edit Profile, Mobile Number and Change Password', async ({
   );
 
   // Verify Profile Loaded
-  await profilePage.verifyProfileLoaded();
+  // await profilePage.verifyProfileLoaded();
 
   // Update First Name
 
@@ -47,14 +47,13 @@ test('Edit Profile, Mobile Number and Change Password', async ({
   // Verify Password Guidelines
   await passwordChangePage.verifyGuidelinesDisplayed();
 
-  // Save Password
   await passwordChangePage.savePassword();
 
   // Verify Password Changed Message
   await passwordChangePage.verifyPasswordChangedMessage();
 
   // Logout
-  await profilePage.logout();
+  await passwordChangePage.logout();
 
   // Login Again With New Password
 //   await loginPage.navigate();

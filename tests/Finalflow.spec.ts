@@ -95,7 +95,7 @@ await profilePage.updatePersonalInfo(
 
 // Logout
 // Logout
-await profilePage.logout();
+
 
 await page.waitForLoadState('networkidle');
 

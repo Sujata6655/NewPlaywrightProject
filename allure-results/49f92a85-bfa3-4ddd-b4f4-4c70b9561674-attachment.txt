@@ -1,5 +1,0 @@
-Mobile Number Updated Successfully
-Verify Phone Number Popup Closed
-Popup Not Displayed
-Password Changed Successfully
-First Name Updated, Mobile Number Updated, Password Changed and Login Successful

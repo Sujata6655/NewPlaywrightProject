@@ -9,6 +9,8 @@ export class PhoneNumberPage {
   readonly verifyPhoneCloseButton: Locator;
   readonly close1button: Locator;
   readonly okButton: Locator;
+  readonly profileDropdown: Locator;
+  readonly logoutButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -29,12 +31,17 @@ export class PhoneNumberPage {
      this.okButton = page.locator(
       '//button[contains(.,"ok")]'
     );
+
+    this.profileDropdown = page.locator('//*[@id="root"]/div/div/div/div/header/div/div/div/button');
+    this.logoutButton = page.locator('xpath=/html/body/div[2]/div[3]/ul/li');
+    
   }
 
   // ==========================================
   // MOBILE NUMBER
   // ==========================================
 
+  
   async updateMobileNumber(phoneNumber: string) {
     await this.phoneTextbox.scrollIntoViewIfNeeded();
 
@@ -96,6 +103,16 @@ async closeVerifyPhonePopup() {
   }
  
   }
+async logout() {
+    await expect(this.profileDropdown).toBeVisible();
+
+    await this.profileDropdown.click();
+
+    await expect(this.logoutButton).toBeVisible();
+
+    await this.logoutButton.click();
+  }
+
 }
 
   // ==========================================

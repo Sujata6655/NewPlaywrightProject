@@ -1,2 +1,0 @@
-Username was filled successfully
-Next button clicked successfully

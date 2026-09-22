@@ -1,40 +1,30 @@
+
+
 import { test } from '@playwright/test';
-import { ForgotPasswordPage } from '../pages/ForgotPasswordPage';
+import { forgot } from '../pages/forgot';
 import testData from '../Fixtures/testData.json';
 
-test('Forgot Password Flow', async ({
-  page,
-  browser,
-  context,
-}) => {
-  const forgotPassword =
-    new ForgotPasswordPage(
-      page,
-      browser,
-      context
-    );
+test('Forgot password', async ({ page, browser, context }) => {
+  const forgotPassword = new forgot(
+    page,
+    browser,
+    context
+  );
 
   await forgotPassword.navigateToOperationsCenter();
 
   const forgotPasswordPage =
     await forgotPassword.openForgotPasswordPage();
 
-  console.log(
-    'Email:',
-    testData.Email
-  );
-
   await forgotPassword.submitEmail(
     forgotPasswordPage,
-    testData.Email
+    testData.Email,
+    
   );
 
-  const otp =
-    await forgotPassword.getOtpFromYopmail(
-      testData.Email
-    );
-
-  console.log('OTP:', otp);
+  const otp = await forgotPassword.getOtpFromYopmail(
+    testData.Email
+  );
 
   await forgotPassword.enterOtp(
     forgotPasswordPage,
